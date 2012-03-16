@@ -171,9 +171,33 @@ function Shot() {
  };
 }
 
+// Class MinicellLife.
+function MinicellLife() {
+ // Properties.
+ this.image = new Image(); this.image.src = "Imagenes/barravidaminicell.png";
+ this.xPos = 612; this.yPos = 4;
+
+ // Methods.
+ this.update = function () {
+  if (this.xPos >= 782) minicell.died = true;
+
+  if (kamehameha.yPos >= minicell.yPos) {
+   if (kamehameha.yPos <= (minicell.yPos + 62)) {
+    if (kamehameha.xPos >= minicell.xPos) {
+     if (kamehameha.xPos <= (minicell.xPos + 43)) {
+      this.xPos += 6;
+      kamehameha.xPos = 900;
+     }
+    }
+   }
+  }
+ };
+}
+
 var keyboard = new KeyboardListener();
 var character = new Character();
 var kamehameha = new Kamehameha();
 var gokulife = new GokuLife();
 var minicell = new Minicell();
 var shot = new Shot();
+var minicelllife = new MinicellLife();
