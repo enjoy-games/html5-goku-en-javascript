@@ -71,7 +71,7 @@ function Character() {
 // Class Kamehameha.
 function Kamehameha() {
  // Properties.
- this.image.src = "Imagenes/kamehameha.gif";
+ this.image = new Image(); this.image.src = "Imagenes/kamehameha.gif";
  this.xPos = 900; this.yPos = 700;
 
  // Methods.
