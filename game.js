@@ -5,6 +5,18 @@ function KeyboardListener() {
  this.getPressed = function () {
   return this.keychar;
  };
+ this.kLeft = function () {
+  return String.fromCharCode(37);
+ };
+ this.kUp = function () {
+  return String.fromCharCode(38);
+ };
+ this.kRight = function () {
+  return String.fromCharCode(39);
+ };
+ this.kDown = function () {
+  return String.fromCharCode(40);
+ };
 
  // Methods
  this.listenKeydown = function (e) {
@@ -14,6 +26,7 @@ function KeyboardListener() {
   else if(e.which) keynum = e.which; // IE9/Firefox/Chrome/Opera/Safari
 
   this.keychar = String.fromCharCode(keynum);
+
   return true;
  };
  this.listenKeyup = function (e) {
