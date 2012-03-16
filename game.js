@@ -122,7 +122,7 @@ function GokuLife() {
     }
    }
   }
- }
+ };
 }
 
 var keyboard = new KeyboardListener();
