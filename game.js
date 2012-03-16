@@ -234,8 +234,10 @@ function gameLoop() {
 
   if (character.died == true) screen.drawImage(lostbox, 250,264);
   if (minicell.died == true) screen.drawImage(winbox, 250,264);
+
+  if (character.died == true || minicell.died == true) exit = true;
  } else {
-  intervalId=window.clearInterval(intervalId);
+  clearInterval(intervalId);
  }
 }
 
