@@ -89,6 +89,42 @@ function Kamehameha() {
  };
 }
 
+// Class GokuLife.
+function GokuLife() {
+ // Properties.
+ this.image = new Image(); this.image.src = "Imagenes/barravidagoku.png";
+ this.xPos = 18; this.yPos = 4;
+
+ // Methods.
+ this.update = function () {
+  if (this.xPos <= -152) {
+   character.died = true;
+  }
+
+  if (shot.yPos >= (character.yPos - 56)) {
+   if (shot.yPos <= (character.yPos + 62)) {
+    if (shot.xPos >= character.xPos) {
+     if (shot.xPos <= (character.xPos + 43)) {
+      gokulife.xPos -= 26;
+      shot.xPos = -400;
+     }
+    }
+   }
+  }
+
+  if (minicell.yPos >= (character.yPos - 56)) {
+   if (minicell.yPos <= (character.yPos + 62)) {
+    if (minicell.rect.x >= character.rect.x) {
+     if (minicell.xPos <= (character.xPos + 43)) {
+      gokulife.xPos -= 26;
+      shot.xPos = -400;
+     }
+    }
+   }
+  }
+ }
+}
+
 var keyboard = new KeyboardListener();
 var character = new Character();
 var kamehameha = new Kamehameha();
