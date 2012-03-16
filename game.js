@@ -211,3 +211,30 @@ var minicelllife = new MinicellLife();
 var exit = false;
 var intervalId;
 
+function gameLoop() {
+ if (exit != true) {
+  character.update();
+  kamehameha.update();
+  if (minicelllife.xPos < 697) minicell.update();
+  else minicell.hard();
+  shot.update();
+  gokulife.update();
+  minicelllife.update();
+
+  screen.drawImage(world, 0, 0);
+  screen.drawImage(character.image, character.xPos, character.yPos);
+  screen.drawImage(kamehameha.image, kamehameha.xPos, kamehameha.yPos);
+  screen.drawImage(minicell.image, minicell.xPos, minicell.yPos);
+  screen.drawImage(shot.image, shot.xPos, shot.yPos);
+  screen.drawImage(gokulife.image, gokulife.xPos, gokulife.yPos);
+  screen.drawImage(minicelllife.image, minicelllife.xPos, minicelllife.yPos);
+  screen.drawImage(gokulifebox.image, 0, 0);
+  screen.drawImage(minicelllifebox.image, 608, 0);
+
+  if (character.died == true) screen.drawImage(lostbox, 250,264);
+  if (minicell.died == true) screen.drawImage(winbox, 250,264);
+ } else {
+  intervalId=window.clearInterval(intervalId);
+ }
+}
+
