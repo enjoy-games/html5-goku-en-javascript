@@ -73,11 +73,10 @@ function Kamehameha() {
  // Properties.
  this.image = new Image(); this.image.src = "Imagenes/kamehameha.gif";
  this.xPos = 900; this.yPos = 700;
-
  // Methods.
  this.update = function () {
   if (this.xPos > 840) {
-   if (keyboard.getPressed == ' ') {
+   if (keyboard.getPressed() == ' ') {
     this.xPos = (character.xPos + 60);
     this.yPos = (character.yPos + 14);
    }
