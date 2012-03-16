@@ -194,10 +194,20 @@ function MinicellLife() {
  };
 }
 
+var gameScreen = document.getElementById("gameScreen"); gameScreen.width = 800; gameScreen.height = 600;
+var screen = gameScreen.getContext("2d");
 var keyboard = new KeyboardListener();
+var world = new Image(); world.src = "Imagenes/namek.jpg";
+var gokulifebox = new Image(); gokulifebox.src = "Imagenes/cuadrovidagoku.png";
+var minicelllifebox = new Image(); minicelllifebox.src = "Imagenes/cuadrovidaminicell.png";
+var winbox = new Image(); winbox.src = "Imagenes/Hasganado.png";
+var lostbox = new Image(); lostbox.src = "Imagenes/Hasperdido.png";
 var character = new Character();
 var kamehameha = new Kamehameha();
-var gokulife = new GokuLife();
 var minicell = new Minicell();
 var shot = new Shot();
+var gokulife = new GokuLife();
 var minicelllife = new MinicellLife();
+var exit = false;
+var intervalId;
+
