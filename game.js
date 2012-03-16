@@ -1,7 +1,10 @@
 // Class KeyboardListener.
 function KeyboardListener() {
  // Properties.
- this.getPressed = null;
+ this.keychar = null;
+ this.getPressed = function () {
+  return this.keychar;
+ };
 
  // Methods
  this.listenKeydown = function (e) {
@@ -10,13 +13,13 @@ function KeyboardListener() {
   if(window.event) keynum = e.keyCode; // IE8 and earlier
   else if(e.which) keynum = e.which; // IE9/Firefox/Chrome/Opera/Safari
 
-  this.getPressed = String.fromCharCode(keynum);
+  this.keychar = String.fromCharCode(keynum);
   return true;
  };
  this.listenKeyup = function (e) {
-  this.getPressed = null;
+  this.keychar = null;
   return true;
- }
+ };
 }
 
 var keyboard = new KeyboardListener();
