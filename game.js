@@ -114,7 +114,7 @@ function GokuLife() {
 
   if (minicell.yPos >= (character.yPos - 56)) {
    if (minicell.yPos <= (character.yPos + 62)) {
-    if (minicell.rect.x >= character.rect.x) {
+    if (minicell.xPos >= character.xPos) {
      if (minicell.xPos <= (character.xPos + 43)) {
       gokulife.xPos -= 26;
       shot.xPos = -400;
@@ -210,6 +210,7 @@ var gokulife = new GokuLife();
 var minicelllife = new MinicellLife();
 var exit = false;
 var intervalId;
+var fps = 60;
 
 function gameLoop() {
  if (exit != true) {
@@ -228,8 +229,8 @@ function gameLoop() {
   screen.drawImage(shot.image, shot.xPos, shot.yPos);
   screen.drawImage(gokulife.image, gokulife.xPos, gokulife.yPos);
   screen.drawImage(minicelllife.image, minicelllife.xPos, minicelllife.yPos);
-  screen.drawImage(gokulifebox.image, 0, 0);
-  screen.drawImage(minicelllifebox.image, 608, 0);
+  screen.drawImage(gokulifebox, 0, 0);
+  screen.drawImage(minicelllifebox, 608, 0);
 
   if (character.died == true) screen.drawImage(lostbox, 250,264);
   if (minicell.died == true) screen.drawImage(winbox, 250,264);

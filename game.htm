@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="game.css">
  </head>
- <body onkeydown="keyboard.listenKeydown(event);" onkeyup="keyboard.listenKeyup(event);" oncontextmenu="return false;" onload="intervalId = setInterval("gameLoop()",1000);">
+ <body onkeydown="keyboard.listenKeydown(event);" onkeyup="keyboard.listenKeyup(event);" oncontextmenu="return false;" onload="intervalId = setInterval('gameLoop()',1/fps);">
   <canvas id="gameScreen">Tu navegador no es compatible con el elemento canvas de html5. Use un navegador compatible.</canvas>
  </body>
  <script src="game.js"></script>
