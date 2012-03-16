@@ -68,4 +68,25 @@ function Character() {
  }
 }
 
+// Class Kamehameha.
+function Kamehameha() {
+ // Properties.
+ this.image.src = "Imagenes/kamehameha.gif";
+ this.xPos = 900; this.yPos = 700;
+
+ // Methods.
+ this.update = function () {
+  if (this.xPos > 840) {
+   if (keyboard.getPressed == ' ') {
+    this.xPos = (personaje.xPos + 60);
+    this.yPos = (personaje.yPos + 14);
+   }
+  }
+
+  if (this.xPos < 870) {
+   this.xPos += 20;
+  }
+ };
+}
+
 var keyboard = new KeyboardListener();
