@@ -55,7 +55,7 @@ function Character() {
    if (this.xPos > 0) this.xPos -= 10;
   } else if (keyboard.getPressed() == keyboard.kRight()) {
    this.image.src = "Imagenes/gokuright.png";
-   if (this.xPos < 740) self.xPos += 10;
+   if (this.xPos < 740) this.xPos += 10;
   }
 
   if (keyboard.getPressed() == keyboard.kUp()) {
@@ -63,7 +63,7 @@ function Character() {
    if (this.yPos > 32) this.yPos -= 10;
   } else if (keyboard.getPressed() == keyboard.kDown()) {
    this.image.src = "Imagenes/gokudown.png";
-   if (this.y < 530) this.yPos += 10;
+   if (this.yPos < 530) this.yPos += 10;
   }
  }
 }
@@ -135,11 +135,11 @@ function Minicell() {
 
  // Methods.
  this.update = function () {
-  if (this.yPos == 40) this.flag = false;
-  else if (this.yPos == 540) this.flag = true;
+  if (this.yPos <= 40) this.flag = false;
+  else if (this.yPos >= 540) this.flag = true;
 
-  if (this.flag = false) this.yPos += 10;
-  else if (this.flag = true) this.yPos -= 10;
+  if (this.flag == false) this.yPos += 10;
+  else if (this.flag == true) this.yPos -= 10;
  };
 
  this.hard = function () {
@@ -213,7 +213,7 @@ var intervalId;
 var fps = 60;
 
 function gameLoop() {
- if (exit != true) {
+ if (exit == false) {
   character.update();
   kamehameha.update();
   if (minicelllife.xPos < 697) minicell.update();
