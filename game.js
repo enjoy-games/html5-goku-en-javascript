@@ -78,8 +78,8 @@ function Kamehameha() {
  this.update = function () {
   if (this.xPos > 840) {
    if (keyboard.getPressed == ' ') {
-    this.xPos = (personaje.xPos + 60);
-    this.yPos = (personaje.yPos + 14);
+    this.xPos = (character.xPos + 60);
+    this.yPos = (character.yPos + 14);
    }
   }
 
@@ -90,3 +90,5 @@ function Kamehameha() {
 }
 
 var keyboard = new KeyboardListener();
+var character = new Character();
+var kamehameha = new Kamehameha();
