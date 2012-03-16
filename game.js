@@ -125,7 +125,7 @@ function GokuLife() {
  };
 }
 
-// Class Minicell
+// Class Minicell.
 function Minicell() {
  // Properties.
  this.image = new Image(); this.image.src = "Imagenes/minicell.png";
@@ -150,8 +150,30 @@ function Minicell() {
  };
 }
 
+// Class Shot.
+function Shot() {
+ // Properties.
+ this.image = new Image(); this.image.src = "Imagenes/disparominicell.png";
+ this.xPos = -400; this.yPos = -400;
+
+ // Methods.
+ this.update = function () {
+  if (this.xPos == -400) {
+   if (minicell.yPos == character.yPos) {
+    this.xPos = (minicell.xPos - 60);
+    this.yPos = (minicell.yPos - 14);
+   }
+  }
+
+  if (this.xPos > -400) {
+   this.xPos -= 5;
+  }
+ };
+}
+
 var keyboard = new KeyboardListener();
 var character = new Character();
 var kamehameha = new Kamehameha();
 var gokulife = new GokuLife();
 var minicell = new Minicell();
+var shot = new Shot();
