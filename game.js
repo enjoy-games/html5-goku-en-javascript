@@ -1,3 +1,26 @@
+// Bucle optimizado para animaciones web.
+(function() {
+  var lastTime = 0;
+  var vendors = ['ms', 'moz', 'webkit', 'o'];
+
+  for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+   window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+   window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+  }
+
+  if (!window.requestAnimationFrame)
+   window.requestAnimationFrame = function(callback, element) {
+    var currTime = new Date().getTime();
+    var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+    var id = window.setTimeout(function() { callback(currTime + timeToCall); }, timeToCall);
+    lastTime = currTime + timeToCall;
+    return id;
+   };
+
+  if (!window.cancelAnimationFrame)
+   window.cancelAnimationFrame = function(id) { clearTimeout(id); };
+}());
+
 // Class KeyboardListener.
 function KeyboardListener() {
  // Properties.
@@ -209,9 +232,10 @@ var gokulife = new GokuLife();
 var minicelllife = new MinicellLife();
 var exit = false;
 var intervalId;
-var fps = 60;
+//var fps = 60;
 
 function gameLoop() {
+ intervalId = requestAnimationFrame(gameLoop);
  if (exit == false) {
   character.update();
   kamehameha.update();
@@ -236,7 +260,8 @@ function gameLoop() {
 
   if (character.died == true || minicell.died == true) exit = true;
  } else {
-  clearInterval(intervalId);
+  //clearInterval(intervalId);
+  cancelAnimationFrame(intervalId);
  }
 }
 
