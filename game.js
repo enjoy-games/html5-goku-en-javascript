@@ -218,6 +218,8 @@ function MinicellLife() {
 
 var gameScreen = document.getElementById("gameScreen"); gameScreen.width = 800; gameScreen.height = 600;
 var screen = gameScreen.getContext("2d");
+var bufferCanvas = document.createElement('canvas'); bufferCanvas.width = gameScreen.width; bufferCanvas.height = gameScreen.height;
+var bufferContext = bufferCanvas.getContext('2d');
 var keyboard = new KeyboardListener();
 var world = new Image(); world.src = "Imagenes/namek.jpg";
 var gokulifebox = new Image(); gokulifebox.src = "Imagenes/cuadrovidagoku.png";
@@ -245,20 +247,22 @@ function gameLoop() {
   gokulife.update();
   minicelllife.update();
 
-  screen.drawImage(world, 0, 0);
-  screen.drawImage(character.image, character.xPos, character.yPos);
-  screen.drawImage(kamehameha.image, kamehameha.xPos, kamehameha.yPos);
-  screen.drawImage(minicell.image, minicell.xPos, minicell.yPos);
-  screen.drawImage(shot.image, shot.xPos, shot.yPos);
-  screen.drawImage(gokulife.image, gokulife.xPos, gokulife.yPos);
-  screen.drawImage(minicelllife.image, minicelllife.xPos, minicelllife.yPos);
-  screen.drawImage(gokulifebox, 0, 0);
-  screen.drawImage(minicelllifebox, 608, 0);
+  bufferContext.drawImage(world, 0, 0);
+  bufferContext.drawImage(character.image, character.xPos, character.yPos);
+  bufferContext.drawImage(kamehameha.image, kamehameha.xPos, kamehameha.yPos);
+  bufferContext.drawImage(minicell.image, minicell.xPos, minicell.yPos);
+  bufferContext.drawImage(shot.image, shot.xPos, shot.yPos);
+  bufferContext.drawImage(gokulife.image, gokulife.xPos, gokulife.yPos);
+  bufferContext.drawImage(minicelllife.image, minicelllife.xPos, minicelllife.yPos);
+  bufferContext.drawImage(gokulifebox, 0, 0);
+  bufferContext.drawImage(minicelllifebox, 608, 0);
 
-  if (character.died == true) screen.drawImage(lostbox, 250,264);
-  if (minicell.died == true) screen.drawImage(winbox, 250,264);
+  if (character.died == true) bufferContext.drawImage(lostbox, 250,264);
+  if (minicell.died == true) bufferContext.drawImage(winbox, 250,264);
 
   if (character.died == true || minicell.died == true) exit = true;
+
+  screen.drawImage(bufferCanvas, 0, 0);
  } else {
   //clearInterval(intervalId);
   cancelAnimationFrame(intervalId);
