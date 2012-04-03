@@ -102,6 +102,7 @@ function Kamehameha() {
    if (keyboard.getPressed() == ' ') {
     this.xPos = (character.xPos + 60);
     this.yPos = (character.yPos + 14);
+    sonidoDisparoGoku.play();
    }
   }
 
@@ -129,6 +130,7 @@ function GokuLife() {
      if (shot.xPos <= (character.xPos + 43)) {
       gokulife.xPos -= 26;
       shot.xPos = -400;
+      heridoGoku.play();
      }
     }
    }
@@ -140,6 +142,7 @@ function GokuLife() {
      if (minicell.xPos <= (character.xPos + 43)) {
       gokulife.xPos -= 26;
       shot.xPos = -400;
+      heridoGoku.play();
      }
     }
    }
@@ -184,6 +187,7 @@ function Shot() {
    if (minicell.yPos == character.yPos) {
     this.xPos = (minicell.xPos - 60);
     this.yPos = (minicell.yPos - 14);
+    sonidoDisparoCell.play();
    }
   }
 
@@ -209,6 +213,7 @@ function MinicellLife() {
      if (kamehameha.xPos <= (minicell.xPos + 43)) {
       this.xPos += 6;
       kamehameha.xPos = 900;
+      heridoCell.play();
      }
     }
    }
@@ -234,7 +239,15 @@ var gokulife = new GokuLife();
 var minicelllife = new MinicellLife();
 var exit = false;
 var intervalId;
-//var fps = 60;
+var bso = document.getElementById('bso');
+bso.volume = 0.5;
+bso.play();
+var sonidoDisparoGoku = document.getElementById('disparoGoku');
+var sonidoDisparoCell = document.getElementById('disparoCell');
+var heridoCell = document.getElementById('heridoCell');
+heridoCell.volume = 0.4;
+var heridoGoku = document.getElementById('heridoGoku');
+heridoGoku.volume = 0.3;
 
 function gameLoop() {
  intervalId = requestAnimationFrame(gameLoop);
@@ -265,6 +278,7 @@ function gameLoop() {
   screen.drawImage(bufferCanvas, 0, 0);
  } else {
   //clearInterval(intervalId);
+  bso.pause();
   cancelAnimationFrame(intervalId);
  }
 }
