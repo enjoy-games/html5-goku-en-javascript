@@ -269,7 +269,6 @@ function gameLoop() {
  stats_fps.begin();
  stats_ms.begin();
 
- intervalId = requestAnimationFrame(gameLoop);
  if (exit == false) {
   character.update();
   kamehameha.update();
@@ -300,6 +299,10 @@ function gameLoop() {
   bso.pause();
   cancelAnimationFrame(intervalId);
  }
+
+ setTimeout(function() {
+  intervalId = requestAnimationFrame(gameLoop);
+ }, 10);
 
  stats_fps.end();
  stats_ms.end();
