@@ -249,7 +249,26 @@ heridoCell.volume = 0.4;
 var heridoGoku = document.getElementById('heridoGoku');
 heridoGoku.volume = 0.3;
 
+// Estadísticas.
+var stats_fps = new Stats(), stats_ms = new Stats();
+stats_fps.setMode(0); stats_ms.setMode(1); // 0: fps, 1: ms
+// Align top-left
+stats_fps.domElement.style.position = 'absolute';
+stats_fps.domElement.style.left = '0px';
+stats_fps.domElement.style.top = '0px';
+// Align top-left
+stats_ms.domElement.style.position = 'absolute';
+stats_ms.domElement.style.left = '100px';
+stats_ms.domElement.style.top = '0px';
+/** /
+document.body.appendChild( stats_fps.domElement );
+document.body.appendChild( stats_ms.domElement );
+/**/
+
 function gameLoop() {
+ stats_fps.begin();
+ stats_ms.begin();
+
  intervalId = requestAnimationFrame(gameLoop);
  if (exit == false) {
   character.update();
@@ -281,5 +300,8 @@ function gameLoop() {
   bso.pause();
   cancelAnimationFrame(intervalId);
  }
+
+ stats_fps.end();
+ stats_ms.end();
 }
 
