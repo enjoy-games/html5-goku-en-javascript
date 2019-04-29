@@ -61,31 +61,31 @@ function KeyboardListener() {
 // Class Character.
 function Character() {
  // Properties.
- this.image = new Image(); this.image.src = "Imagenes/goku.png";
+ this.image = new Image(); this.image.src = "Imagenes/nuevo.png";
  this.xPos = 50; this.yPos = 300;
  this.died = false;
 
  // Methods.
  this.update = function () {
   if (keyboard.getPressed() == ' ') {
-   this.image.src = "Imagenes/gokukamehameha.png";
+   this.image.src = "Imagenes/nuevo.png";
   } else if (kamehameha.xPos > 860) {
-   this.image.src = "Imagenes/goku.png";
+   this.image.src = "Imagenes/nuevo.png";
   }
 
   if (keyboard.getPressed() == keyboard.kLeft()) {
-   this.image.src = "Imagenes/gokuleft.png";
+   this.image.src = "Imagenes/nuevo.png";
    if (this.xPos > 0) this.xPos -= 10;
   } else if (keyboard.getPressed() == keyboard.kRight()) {
-   this.image.src = "Imagenes/gokuright.png";
+   this.image.src = "Imagenes/nuevo.png";
    if (this.xPos < 740) this.xPos += 10;
   }
 
   if (keyboard.getPressed() == keyboard.kUp()) {
-   this.image.src = "Imagenes/gokuup.png";
+   this.image.src = "Imagenes/nuevo.png";
    if (this.yPos > 32) this.yPos -= 10;
   } else if (keyboard.getPressed() == keyboard.kDown()) {
-   this.image.src = "Imagenes/gokudown.png";
+   this.image.src = "Imagenes/nuevo.png";
    if (this.yPos < 530) this.yPos += 10;
   }
  }
@@ -153,7 +153,7 @@ function GokuLife() {
 // Class Minicell.
 function Minicell() {
  // Properties.
- this.image = new Image(); this.image.src = "Imagenes/minicell.png";
+ this.image = new Image(); this.image.src = "Imagenes/nuevo2.png";
  this.xPos = 750; this.yPos = 300;
  this.flag = false;
  this.died = false;
@@ -163,8 +163,8 @@ function Minicell() {
   if (this.yPos <= 40) this.flag = false;
   else if (this.yPos >= 540) this.flag = true;
 
-  if (this.flag == false) this.yPos += 10;
-  else if (this.flag == true) this.yPos -= 10;
+  if (this.flag == false) this.yPos += 5;
+  else if (this.flag == true) this.yPos -= 5;
  };
 
  this.hard = function () {
