@@ -153,7 +153,7 @@ function GokuLife() {
 // Class Minicell.
 function Minicell() {
  // Properties.
- this.image = new Image(); this.image.src = "Imagenes/minicell.png";
+ this.image = new Image(); this.image.src = "Imagenes/lugia.png";
  this.xPos = 750; this.yPos = 300;
  this.flag = false;
  this.died = false;
@@ -163,15 +163,15 @@ function Minicell() {
   if (this.yPos <= 40) this.flag = false;
   else if (this.yPos >= 540) this.flag = true;
 
-  if (this.flag == false) this.yPos += 10;
-  else if (this.flag == true) this.yPos -= 10;
+  if (this.flag == false) this.yPos += 1;
+  else if (this.flag == true) this.yPos -= 1;
  };
 
  this.hard = function () {
   if (this.xPos < 0) this.xPos = 800;
   if (this.yPos > 600) this.yPos = 0;
-  this.xPos -= 10;
-  this.yPos += 10;
+  this.xPos -= 1;
+  this.yPos += 1;
  };
 }
 
