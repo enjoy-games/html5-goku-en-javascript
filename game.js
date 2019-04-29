@@ -61,7 +61,7 @@ function KeyboardListener() {
 // Class Character.
 function Character() {
  // Properties.
- this.image = new Image(); this.image.src = "Imagenes/goku.png";
+ this.image = new Image(); this.image.src = "Imagenes/imagen1.png";
  this.xPos = 50; this.yPos = 300;
  this.died = false;
 
@@ -94,7 +94,7 @@ function Character() {
 // Class Kamehameha.
 function Kamehameha() {
  // Properties.
- this.image = new Image(); this.image.src = "Imagenes/kamehameha.gif";
+ this.image = new Image(); this.image.src = "Imagenes/pelota.jpg";
  this.xPos = 900; this.yPos = 700;
  // Methods.
  this.update = function () {
@@ -153,7 +153,7 @@ function GokuLife() {
 // Class Minicell.
 function Minicell() {
  // Properties.
- this.image = new Image(); this.image.src = "Imagenes/minicell.png";
+ this.image = new Image(); this.image.src = "Imagenes/imagen2.png";
  this.xPos = 750; this.yPos = 300;
  this.flag = false;
  this.died = false;
@@ -163,15 +163,15 @@ function Minicell() {
   if (this.yPos <= 40) this.flag = false;
   else if (this.yPos >= 540) this.flag = true;
 
-  if (this.flag == false) this.yPos += 10;
-  else if (this.flag == true) this.yPos -= 10;
+  if (this.flag == false) this.yPos += 1;
+  else if (this.flag == true) this.yPos -= 1;
  };
 
  this.hard = function () {
   if (this.xPos < 0) this.xPos = 800;
   if (this.yPos > 600) this.yPos = 0;
-  this.xPos -= 10;
-  this.yPos += 10;
+  this.xPos -= 1;
+  this.yPos += 1;
  };
 }
 
@@ -211,6 +211,7 @@ function MinicellLife() {
    if (kamehameha.yPos <= (minicell.yPos + 62)) {
     if (kamehameha.xPos >= minicell.xPos) {
      if (kamehameha.xPos <= (minicell.xPos + 43)) {
+      minicell.died = true;
       this.xPos += 6;
       kamehameha.xPos = 900;
       heridoCell.play();
