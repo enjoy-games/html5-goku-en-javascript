@@ -61,31 +61,31 @@ function KeyboardListener() {
 // Class Character.
 function Character() {
  // Properties.
- this.image = new Image(); this.image.src = "Imagenes/goku.png";
+ this.image = new Image(); this.image.src = "img/goku.png";
  this.xPos = 50; this.yPos = 300;
  this.died = false;
 
  // Methods.
  this.update = function () {
   if (keyboard.getPressed() == ' ') {
-   this.image.src = "Imagenes/gokukamehameha.png";
+   this.image.src = "img/gokukamehameha.png";
   } else if (kamehameha.xPos > 860) {
-   this.image.src = "Imagenes/goku.png";
+   this.image.src = "img/goku.png";
   }
 
   if (keyboard.getPressed() == keyboard.kLeft()) {
-   this.image.src = "Imagenes/gokuleft.png";
+   this.image.src = "img/gokuleft.png";
    if (this.xPos > 0) this.xPos -= 10;
   } else if (keyboard.getPressed() == keyboard.kRight()) {
-   this.image.src = "Imagenes/gokuright.png";
+   this.image.src = "img/gokuright.png";
    if (this.xPos < 740) this.xPos += 10;
   }
 
   if (keyboard.getPressed() == keyboard.kUp()) {
-   this.image.src = "Imagenes/gokuup.png";
+   this.image.src = "img/gokuup.png";
    if (this.yPos > 32) this.yPos -= 10;
   } else if (keyboard.getPressed() == keyboard.kDown()) {
-   this.image.src = "Imagenes/gokudown.png";
+   this.image.src = "img/gokudown.png";
    if (this.yPos < 530) this.yPos += 10;
   }
  }
@@ -94,7 +94,7 @@ function Character() {
 // Class Kamehameha.
 function Kamehameha() {
  // Properties.
- this.image = new Image(); this.image.src = "Imagenes/kamehameha.gif";
+ this.image = new Image(); this.image.src = "img/kamehameha.gif";
  this.xPos = 900; this.yPos = 700;
  // Methods.
  this.update = function () {
@@ -115,7 +115,7 @@ function Kamehameha() {
 // Class GokuLife.
 function GokuLife() {
  // Properties.
- this.image = new Image(); this.image.src = "Imagenes/barravidagoku.png";
+ this.image = new Image(); this.image.src = "img/lifebar_user.png";
  this.xPos = 18; this.yPos = 4;
 
  // Methods.
@@ -153,7 +153,7 @@ function GokuLife() {
 // Class Minicell.
 function Minicell() {
  // Properties.
- this.image = new Image(); this.image.src = "Imagenes/minicell.png";
+ this.image = new Image(); this.image.src = "img/minicell.png";
  this.xPos = 750; this.yPos = 300;
  this.flag = false;
  this.died = false;
@@ -178,7 +178,7 @@ function Minicell() {
 // Class Shot.
 function Shot() {
  // Properties.
- this.image = new Image(); this.image.src = "Imagenes/disparominicell.png";
+ this.image = new Image(); this.image.src = "img/dragonball.png";
  this.xPos = -400; this.yPos = -400;
 
  // Methods.
@@ -200,7 +200,7 @@ function Shot() {
 // Class MinicellLife.
 function MinicellLife() {
  // Properties.
- this.image = new Image(); this.image.src = "Imagenes/barravidaminicell.png";
+ this.image = new Image(); this.image.src = "img/lifebar_cpu.png";
  this.xPos = 612; this.yPos = 4;
 
  // Methods.
@@ -226,11 +226,11 @@ var screen = gameScreen.getContext("2d");
 var bufferCanvas = document.createElement('canvas'); bufferCanvas.width = gameScreen.width; bufferCanvas.height = gameScreen.height;
 var bufferContext = bufferCanvas.getContext('2d');
 var keyboard = new KeyboardListener();
-var world = new Image(); world.src = "Imagenes/namek.jpg";
-var gokulifebox = new Image(); gokulifebox.src = "Imagenes/cuadrovidagoku.png";
-var minicelllifebox = new Image(); minicelllifebox.src = "Imagenes/cuadrovidaminicell.png";
-var winbox = new Image(); winbox.src = "Imagenes/Hasganado.png";
-var lostbox = new Image(); lostbox.src = "Imagenes/Hasperdido.png";
+var world = new Image(); world.src = "img/namek.jpg";
+var gokulifebox = new Image(); gokulifebox.src = "img/life_box_user.png";
+var minicelllifebox = new Image(); minicelllifebox.src = "img/life_box_cpu.png";
+var winbox = new Image(); winbox.src = "img/user_wins_es.png";
+var lostbox = new Image(); lostbox.src = "img/user_loses_es.png";
 var character = new Character();
 var kamehameha = new Kamehameha();
 var minicell = new Minicell();
