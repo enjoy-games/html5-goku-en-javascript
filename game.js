@@ -1,4 +1,4 @@
-// Bucle optimizado para animaciones web.
+// Optimized loop for web animations.
 (function() {
   var lastTime = 0;
   var vendors = ['ms', 'moz', 'webkit', 'o'];
@@ -102,7 +102,7 @@ function Kamehameha() {
    if (keyboard.getPressed() == ' ') {
     this.xPos = (character.xPos + 60);
     this.yPos = (character.yPos + 14);
-    sonidoDisparoGoku.play();
+    sound_user_shot.play();
    }
   }
 
@@ -130,7 +130,7 @@ function GokuLife() {
      if (shot.xPos <= (character.xPos + 43)) {
       gokulife.xPos -= 26;
       shot.xPos = -400;
-      heridoGoku.play();
+      sound_user_hurt.play();
      }
     }
    }
@@ -142,7 +142,7 @@ function GokuLife() {
      if (minicell.xPos <= (character.xPos + 43)) {
       gokulife.xPos -= 26;
       shot.xPos = -400;
-      heridoGoku.play();
+      sound_user_hurt.play();
      }
     }
    }
@@ -187,7 +187,7 @@ function Shot() {
    if (minicell.yPos == character.yPos) {
     this.xPos = (minicell.xPos - 60);
     this.yPos = (minicell.yPos - 14);
-    sonidoDisparoCell.play();
+    sound_cpu_shot.play();
    }
   }
 
@@ -213,7 +213,7 @@ function MinicellLife() {
      if (kamehameha.xPos <= (minicell.xPos + 43)) {
       this.xPos += 6;
       kamehameha.xPos = 900;
-      heridoCell.play();
+      sound_cpu_hurt.play();
      }
     }
    }
@@ -239,17 +239,17 @@ var gokulife = new GokuLife();
 var minicelllife = new MinicellLife();
 var exit = false;
 var intervalId;
-var bso = document.getElementById('bso');
-bso.volume = 0.5;
-bso.play();
-var sonidoDisparoGoku = document.getElementById('disparoGoku');
-var sonidoDisparoCell = document.getElementById('disparoCell');
-var heridoCell = document.getElementById('heridoCell');
-heridoCell.volume = 0.4;
-var heridoGoku = document.getElementById('heridoGoku');
-heridoGoku.volume = 0.3;
+var ost = document.getElementById('ost');
+ost.volume = 0.5;
+ost.play();
+var sound_user_shot = document.getElementById('sound_user_shot');
+var sound_cpu_shot = document.getElementById('sound_cpu_shot');
+var sound_cpu_hurt = document.getElementById('sound_cpu_hurt');
+sound_cpu_hurt.volume = 0.4;
+var sound_user_hurt = document.getElementById('sound_user_hurt');
+sound_user_hurt.volume = 0.3;
 
-// Estadísticas.
+// Statistics
 var stats_fps = new Stats(), stats_ms = new Stats();
 stats_fps.setMode(0); stats_ms.setMode(1); // 0: fps, 1: ms
 // Align top-left
@@ -296,7 +296,7 @@ function gameLoop() {
   screen.drawImage(bufferCanvas, 0, 0);
  } else {
   //clearInterval(intervalId);
-  bso.pause();
+  ost.pause();
   cancelAnimationFrame(intervalId);
  }
 
