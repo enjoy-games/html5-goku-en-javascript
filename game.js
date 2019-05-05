@@ -260,10 +260,8 @@ stats_fps.domElement.style.top = '0px';
 stats_ms.domElement.style.position = 'absolute';
 stats_ms.domElement.style.left = '100px';
 stats_ms.domElement.style.top = '0px';
-/** /
-document.body.appendChild( stats_fps.domElement );
-document.body.appendChild( stats_ms.domElement );
-/**/
+// document.body.appendChild( stats_fps.domElement );
+// document.body.appendChild( stats_ms.domElement );
 
 function gameLoop() {
  stats_fps.begin();
