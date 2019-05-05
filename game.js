@@ -21,9 +21,9 @@
    window.cancelAnimationFrame = function(id) { clearTimeout(id); };
 }());
 
-// Class KeyboardListener.
+// Class KeyboardListener
 function KeyboardListener() {
- // Properties.
+ // Properties
  this.keychar = null;
  this.getPressed = function () {
   return this.keychar;
@@ -41,7 +41,7 @@ function KeyboardListener() {
   return String.fromCharCode(40);
  };
 
- // Methods.
+ // Methods
  this.listenKeydown = function (e) {
   var keynum;
 
@@ -58,51 +58,59 @@ function KeyboardListener() {
  };
 }
 
-// Class Character.
-function Character() {
- // Properties.
- this.image = new Image(); this.image.src = "assets/characters/dragon_ball_goku/sprites/standing.png";
+// Class User
+function User($character_name) {
+ // Properties
+ this.character_name = $character_name;
+ this.directory = path_prefix_characters + this.character_name;
+ this.image = new Image(); this.image.src = this.directory + "/sprites/standing.png";
  this.xPos = 50; this.yPos = 300;
  this.died = false;
+ this.sound_hurt = document.getElementById('sound_user_hurt');
+ this.sound_hurt.volume = 0.3;
+ this.shot = new UserShot(this.directory);
 
- // Methods.
+ // Methods
  this.update = function () {
   if (keyboard.getPressed() == ' ') {
-   this.image.src = "assets/characters/dragon_ball_goku/sprites/shooting.png";
-  } else if (kamehameha.xPos > 860) {
-   this.image.src = "assets/characters/dragon_ball_goku/sprites/standing.png";
+   this.image.src = this.directory + "/sprites/shooting.png";
+  } else if (this.shot.xPos > 860) {
+   this.image.src = this.directory + "/sprites/standing.png";
   }
 
   if (keyboard.getPressed() == keyboard.kLeft()) {
-   this.image.src = "assets/characters/dragon_ball_goku/sprites/left.png";
+   this.image.src = this.directory + "/sprites/left.png";
    if (this.xPos > 0) this.xPos -= 10;
   } else if (keyboard.getPressed() == keyboard.kRight()) {
-   this.image.src = "assets/characters/dragon_ball_goku/sprites/right.png";
+   this.image.src = this.directory + "/sprites/right.png";
    if (this.xPos < 740) this.xPos += 10;
   }
 
   if (keyboard.getPressed() == keyboard.kUp()) {
-   this.image.src = "assets/characters/dragon_ball_goku/sprites/up.png";
+   this.image.src = this.directory + "/sprites/up.png";
    if (this.yPos > 32) this.yPos -= 10;
   } else if (keyboard.getPressed() == keyboard.kDown()) {
-   this.image.src = "assets/characters/dragon_ball_goku/sprites/down.png";
+   this.image.src = this.directory + "/sprites/down.png";
    if (this.yPos < 530) this.yPos += 10;
   }
  }
 }
 
-// Class Kamehameha.
-function Kamehameha() {
- // Properties.
- this.image = new Image(); this.image.src = "assets/characters/dragon_ball_goku/sprites/shot.gif";
+// Class UserShot
+function UserShot($directory) {
+ // Properties
+ this.directory = $directory;
+ this.image = new Image(); this.image.src = this.directory + "/sprites/shot.gif";
  this.xPos = 900; this.yPos = 700;
- // Methods.
+ this.sound = document.getElementById('sound_user_shot');
+
+ // Methods
  this.update = function () {
   if (this.xPos > 840) {
    if (keyboard.getPressed() == ' ') {
-    this.xPos = (character.xPos + 60);
-    this.yPos = (character.yPos + 14);
-    sound_user_shot.play();
+    this.xPos = (user.xPos + 60);
+    this.yPos = (user.yPos + 14);
+    user.shot.sound.play();
    }
   }
 
@@ -112,36 +120,38 @@ function Kamehameha() {
  };
 }
 
-// Class GokuLife.
-function GokuLife() {
- // Properties.
- this.image = new Image(); this.image.src = "assets/life_boxes/default_left/lifebar.png";
+// Class UserLife
+function UserLife($life_box_name) {
+ // Properties
+ this.life_box_name = $life_box_name;
+ this.box = new Image(); this.box.src = path_prefix_lifeboxes + this.life_box_name + "/life_box.png";
+ this.bar = new Image(); this.bar.src = path_prefix_lifeboxes + this.life_box_name + "/lifebar.png";
  this.xPos = 18; this.yPos = 4;
 
- // Methods.
+ // Methods
  this.update = function () {
   if (this.xPos <= -152) {
-   character.died = true;
+   user.died = true;
   }
 
-  if (shot.yPos >= (character.yPos - 56)) {
-   if (shot.yPos <= (character.yPos + 62)) {
-    if (shot.xPos >= character.xPos) {
-     if (shot.xPos <= (character.xPos + 43)) {
-      gokulife.xPos -= 26;
-      shot.xPos = -400;
+  if (cpu_controller.shot.yPos >= (user.yPos - 56)) {
+   if (cpu_controller.shot.yPos <= (user.yPos + 62)) {
+    if (cpu_controller.shot.xPos >= user.xPos) {
+     if (cpu_controller.shot.xPos <= (user.xPos + 43)) {
+      this.xPos -= 26;
+      cpu_controller.shot.xPos = -400;
       sound_user_hurt.play();
      }
     }
    }
   }
 
-  if (minicell.yPos >= (character.yPos - 56)) {
-   if (minicell.yPos <= (character.yPos + 62)) {
-    if (minicell.xPos >= character.xPos) {
-     if (minicell.xPos <= (character.xPos + 43)) {
-      gokulife.xPos -= 26;
-      shot.xPos = -400;
+  if (cpu_controller.yPos >= (user.yPos - 56)) {
+   if (cpu_controller.yPos <= (user.yPos + 62)) {
+    if (cpu_controller.xPos >= user.xPos) {
+     if (cpu_controller.xPos <= (user.xPos + 43)) {
+      this.xPos -= 26;
+      cpu_controller.shot.xPos = -400;
       sound_user_hurt.play();
      }
     }
@@ -150,15 +160,20 @@ function GokuLife() {
  };
 }
 
-// Class Minicell.
-function Minicell() {
- // Properties.
- this.image = new Image(); this.image.src = "assets/characters/dragon_ball_minicell/sprites/standing.png";
+// Class CpuController
+function CpuController($character_name) {
+ // Properties
+ this.character_name = $character_name;
+ this.directory = path_prefix_characters + this.character_name;
+ this.image = new Image(); this.image.src = this.directory + "/sprites/standing.png";
  this.xPos = 750; this.yPos = 300;
  this.flag = false;
  this.died = false;
+ this.sound_hurt = document.getElementById('sound_cpu_hurt');
+ this.sound_hurt.volume = 0.4;
+ this.shot = new CpuControllerShot(this.directory);
 
- // Methods.
+ // Methods
  this.update = function () {
   if (this.yPos <= 40) this.flag = false;
   else if (this.yPos >= 540) this.flag = true;
@@ -175,19 +190,21 @@ function Minicell() {
  };
 }
 
-// Class Shot.
-function Shot() {
- // Properties.
- this.image = new Image(); this.image.src = "assets/characters/dragon_ball_minicell/sprites/shot.png";
+// Class CpuControllerShot
+function CpuControllerShot($directory) {
+ // Properties
+ this.directory = $directory;
+ this.image = new Image(); this.image.src = this.directory + "/sprites/shot.png";
  this.xPos = -400; this.yPos = -400;
+ this.sound = document.getElementById('sound_cpu_shot');
 
- // Methods.
+ // Methods
  this.update = function () {
   if (this.xPos == -400) {
-   if (minicell.yPos == character.yPos) {
-    this.xPos = (minicell.xPos - 60);
-    this.yPos = (minicell.yPos - 14);
-    sound_cpu_shot.play();
+   if (cpu_controller.yPos == user.yPos) {
+    this.xPos = (cpu_controller.xPos - 60);
+    this.yPos = (cpu_controller.yPos - 14);
+    this.sound.play();
    }
   }
 
@@ -197,23 +214,25 @@ function Shot() {
  };
 }
 
-// Class MinicellLife.
-function MinicellLife() {
- // Properties.
- this.image = new Image(); this.image.src = "assets/life_boxes/default_right/lifebar.png";
+// Class CpuControllerLife
+function CpuControllerLife($life_box_name) {
+ // Properties
+ this.life_box_name = $life_box_name;
+ this.box = new Image(); this.box.src = path_prefix_lifeboxes + this.life_box_name + "/life_box.png";
+ this.bar = new Image(); this.bar.src = path_prefix_lifeboxes + this.life_box_name + "/lifebar.png";
  this.xPos = 612; this.yPos = 4;
 
- // Methods.
+ // Methods
  this.update = function () {
-  if (this.xPos >= 782) minicell.died = true;
+  if (this.xPos >= 782) cpu_controller.died = true;
 
-  if (kamehameha.yPos >= minicell.yPos) {
-   if (kamehameha.yPos <= (minicell.yPos + 62)) {
-    if (kamehameha.xPos >= minicell.xPos) {
-     if (kamehameha.xPos <= (minicell.xPos + 43)) {
+  if (user.shot.yPos >= cpu_controller.yPos) {
+   if (user.shot.yPos <= (cpu_controller.yPos + 62)) {
+    if (user.shot.xPos >= cpu_controller.xPos) {
+     if (user.shot.xPos <= (cpu_controller.xPos + 43)) {
       this.xPos += 6;
-      kamehameha.xPos = 900;
-      sound_cpu_hurt.play();
+      user.shot.xPos = 900;
+      cpu_controller.sound_hurt.play();
      }
     }
    }
@@ -221,33 +240,26 @@ function MinicellLife() {
  };
 }
 
+var path_prefix_characters = 'assets/characters/';
+var path_prefix_lifeboxes = 'assets/life_boxes/';
+var path_prefix_messages = 'assets/messages/';
 var gameScreen = document.getElementById("gameScreen"); gameScreen.width = 800; gameScreen.height = 600;
 var screen = gameScreen.getContext("2d");
 var bufferCanvas = document.createElement('canvas'); bufferCanvas.width = gameScreen.width; bufferCanvas.height = gameScreen.height;
 var bufferContext = bufferCanvas.getContext('2d');
 var keyboard = new KeyboardListener();
 var world = new Image(); world.src = "assets/scenarios/dragon_ball_namek.jpg";
-var gokulifebox = new Image(); gokulifebox.src = "assets/life_boxes/default_left/life_box.png";
-var minicelllifebox = new Image(); minicelllifebox.src = "assets/life_boxes/default_right/life_box.png";
-var winbox = new Image(); winbox.src = "assets/messages/default_user_wins_es.png";
-var lostbox = new Image(); lostbox.src = "assets/messages/default_user_loses_es.png";
-var character = new Character();
-var kamehameha = new Kamehameha();
-var minicell = new Minicell();
-var shot = new Shot();
-var gokulife = new GokuLife();
-var minicelllife = new MinicellLife();
+var winbox = new Image(); winbox.src = path_prefix_messages + "default_user_wins_es.png";
+var lostbox = new Image(); lostbox.src = path_prefix_messages + "default_user_loses_es.png";
+var user = new User('dragon_ball_goku');
+var cpu_controller = new CpuController('dragon_ball_minicell');
+var user_life = new UserLife('default_left');
+var cpu_controller_life = new CpuControllerLife('default_right');
 var exit = false;
 var intervalId;
 var ost = document.getElementById('ost');
 ost.volume = 0.5;
 ost.play();
-var sound_user_shot = document.getElementById('sound_user_shot');
-var sound_cpu_shot = document.getElementById('sound_cpu_shot');
-var sound_cpu_hurt = document.getElementById('sound_cpu_hurt');
-sound_cpu_hurt.volume = 0.4;
-var sound_user_hurt = document.getElementById('sound_user_hurt');
-sound_user_hurt.volume = 0.3;
 
 // Statistics
 var stats_fps = new Stats(), stats_ms = new Stats();
@@ -268,28 +280,28 @@ function gameLoop() {
  stats_ms.begin();
 
  if (exit == false) {
-  character.update();
-  kamehameha.update();
-  if (minicelllife.xPos < 697) minicell.update();
-  else minicell.hard();
-  shot.update();
-  gokulife.update();
-  minicelllife.update();
+  user.update();
+  user.shot.update();
+  if (cpu_controller_life.xPos < 697) cpu_controller.update();
+  else cpu_controller.hard();
+  cpu_controller.shot.update();
+  user_life.update();
+  cpu_controller_life.update();
 
   bufferContext.drawImage(world, 0, 0);
-  bufferContext.drawImage(gokulife.image, gokulife.xPos, gokulife.yPos);
-  bufferContext.drawImage(minicelllife.image, minicelllife.xPos, minicelllife.yPos);
-  bufferContext.drawImage(gokulifebox, 0, 0);
-  bufferContext.drawImage(minicelllifebox, 608, 0);
-  bufferContext.drawImage(character.image, character.xPos, character.yPos);
-  bufferContext.drawImage(kamehameha.image, kamehameha.xPos, kamehameha.yPos);
-  bufferContext.drawImage(minicell.image, minicell.xPos, minicell.yPos);
-  bufferContext.drawImage(shot.image, shot.xPos, shot.yPos);
+  bufferContext.drawImage(user_life.bar, user_life.xPos, user_life.yPos);
+  bufferContext.drawImage(cpu_controller_life.bar, cpu_controller_life.xPos, cpu_controller_life.yPos);
+  bufferContext.drawImage(user_life.box, 0, 0);
+  bufferContext.drawImage(cpu_controller_life.box, 608, 0);
+  bufferContext.drawImage(user.image, user.xPos, user.yPos);
+  bufferContext.drawImage(user.shot.image, user.shot.xPos, user.shot.yPos);
+  bufferContext.drawImage(cpu_controller.image, cpu_controller.xPos, cpu_controller.yPos);
+  bufferContext.drawImage(cpu_controller.shot.image, cpu_controller.shot.xPos, cpu_controller.shot.yPos);
 
-  if (character.died == true) bufferContext.drawImage(lostbox, 250,264);
-  if (minicell.died == true) bufferContext.drawImage(winbox, 250,264);
+  if (user.died == true) bufferContext.drawImage(lostbox, 250,264);
+  if (cpu_controller.died == true) bufferContext.drawImage(winbox, 250,264);
 
-  if (character.died == true || minicell.died == true) exit = true;
+  if (user.died == true || cpu_controller.died == true) exit = true;
 
   screen.drawImage(bufferCanvas, 0, 0);
  } else {
